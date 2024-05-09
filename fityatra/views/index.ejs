@@ -1,0 +1,68 @@
+<%- include('./partials/header.ejs')%>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 mt-5">
+      <h2 class="alert alert-success text-centre" role="alert">
+        Add New Person
+      </h2>
+      <form method="post" action="/student">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" name="name" />
+        </div>
+        <div class="mb-3">
+          <label for="age" class="form-label">Age</label>
+          <input type="text" class="form-control" id="age" name="age" />
+        </div>
+        <div class="mb-3">
+          <label for="fees" class="form-label" name="fees">fees</label>
+          <input type="text" class="form-control" id="fees" name="fees" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <div class="col-sm-6 mt-5">
+      <h2 class="alert alert-danger text-centre">List of Registered Person</h2>
+      <%# Show All Data%>
+      <table class="table tabel-striped tabel-hover">
+        <thead>
+          <tr>
+            <th scope="col">NO</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">fees</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% var i=1 %> <% data.forEach((item)=>{ %>
+          <tr>
+            <td><%= i++ %></td>
+            <td><%=item.name %></td>
+            <td><%=item.age %></td>
+            <td><%=item.fees %></td>
+            <td>
+              <form
+                action="/student/edit/<%=item._id %>"
+                method="post"
+                class="d-inline"
+              >
+                <button type="submit" class="btn">edit</button>
+              </form>
+
+              <form
+                action="/student/delete/<%=item._id %>"
+                method="post"
+                class="d-inline"
+              >
+                <button class="delete">delete</button>
+              </form>
+            </td>
+          </tr>
+          <%})%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include('./partials/header.ejs')%>
